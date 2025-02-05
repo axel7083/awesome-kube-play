@@ -28,21 +28,22 @@ jobs:
     name: Check setup
     runs-on: ubuntu-24.04
     outputs:
-      mymatrix: ${{ steps.list-samples.outputs.myoutput }}
+      build_matrix: ${{ steps.list-samples.outputs.samples_output }}
     steps:
       - uses: actions/checkout@v4
       - name: List samples
         id: list-samples
         run: |
           TARGETS=$(find . -maxdepth 1 -type d -not -path '*/\.*' -not -path '.' | sed 's|^\./||' | jq -R . | jq -s .)
-          echo "myoutput=$(jq -cn --argjson targets "$TARGETS" '{target: $targets}')" >> $GITHUB_OUTPUT
+          echo "samples_output=$(jq -cn --argjson targets "$TARGETS" '{target: $targets}')" >> $GITHUB_OUTPUT
 
   run-matrix:
     needs: check-setup
     runs-on: ubuntu-24.04
     strategy:
-      matrix: ${{ fromJson(needs.check-setup.outputs.mymatrix) }}
+      matrix: ${{ fromJson(needs.check-setup.outputs.build_matrix) }}
     steps:
+      - uses: actions/checkout@v4
       - run: |
-          podman kube play ${{ matrix.target }}/play.yaml --build --start=false
+          podman kube play ${{ github.workspace }}/${{ matrix.target }}/play.yaml --build --start=false
         
