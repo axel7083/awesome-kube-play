@@ -43,4 +43,6 @@ jobs:
     strategy:
       matrix: ${{ fromJson(needs.check-setup.outputs.mymatrix) }}
     steps:
-      - run: echo ${{ matrix.target }}
+      - run: |
+          podman kube play ${{ matrix.target }}/play.yaml --build --start=false
+        
