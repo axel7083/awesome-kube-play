@@ -5,6 +5,7 @@ This repository aim to provide a starting point to use the [Podman Kube Play](ht
 ## Single service samples
 
 - [flask](flask)
+- [flask-redis](flask-redis)
 
 ## Getting started
 
