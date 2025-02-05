@@ -43,7 +43,11 @@ jobs:
     strategy:
       matrix: ${{ fromJson(needs.check-setup.outputs.build_matrix) }}
     steps:
+      # checkout
       - uses: actions/checkout@v4
-      - run: |
-          podman kube play ${{ github.workspace }}/${{ matrix.target }}/play.yaml --build --start=false
+      # build
+      - name: kube play ${{ matrix.target }}
+        working-directory: ${{ github.workspace }}/${{ matrix.target }}
+        run: |
+          podman kube play play.yaml --build --start=false
         
