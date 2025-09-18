@@ -6,6 +6,7 @@ This repository aim to provide a starting point to use the [Podman Kube Play](ht
 
 - [flask](flask)
 - [flask-redis](flask-redis)
+- [fastapi](fastapi)
 
 ## Getting started
 

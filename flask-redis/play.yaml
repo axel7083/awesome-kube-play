@@ -10,6 +10,7 @@ spec:
       ports:
         - containerPort: 8000
           hostPort: 8000
+      # optional health check
       livenessProbe:
         httpGet:
           path: /
