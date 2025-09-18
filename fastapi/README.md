@@ -19,7 +19,7 @@ Listing pods should show the running application
 ```
 $: podman pod ps
 POD ID        NAME        STATUS      CREATED        INFRA ID      # OF CONTAINERS
-96a26d3b398e  flask       Running    2 minutes ago  1f2e5b472950  2
+96a26d3b398e  fastapi     Running    2 minutes ago  1f2e5b472950  2
 ```
 
 ## Stop and remove the containers
